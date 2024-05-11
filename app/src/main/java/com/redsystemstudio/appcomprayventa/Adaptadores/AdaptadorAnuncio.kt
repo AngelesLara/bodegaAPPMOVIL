@@ -24,21 +24,20 @@ import com.redsystemstudio.appcomprayventa.R
 import com.redsystemstudio.appcomprayventa.databinding.ItemAnuncioBinding
 import com.redsystemstudio.appcomprayventa.databinding.ItemAnuncioNuevaVersionBinding
 
-class AdaptadorAnuncio : RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, Filterable{
+class AdaptadorAnuncio(
+    private var context: Context,
+    anuncioArrayList: ArrayList<ModeloAnuncio>
+) : RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>(), Filterable{
 
     private lateinit var binding : ItemAnuncioNuevaVersionBinding
 
-    private var context : Context
-    var anuncioArrayList : ArrayList<ModeloAnuncio>
+    lateinit var anuncioArrayList : ArrayList<ModeloAnuncio>
     private var firebaeAuth : FirebaseAuth
-    private var filtroLista : ArrayList<ModeloAnuncio>
+    private var filtroLista : ArrayList<ModeloAnuncio> = anuncioArrayList
     private var filtro : FiltrarAnuncio ?= null
 
-    constructor(context: Context, anuncioArrayList: ArrayList<ModeloAnuncio>) {
-        this.context = context
-        this.anuncioArrayList = anuncioArrayList
+    init {
         firebaeAuth = FirebaseAuth.getInstance()
-        this.filtroLista = anuncioArrayList
     }
 
 
@@ -138,7 +137,7 @@ class AdaptadorAnuncio : RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, F
                                 .load(imagenUrl)
                                 .placeholder(R.drawable.ic_imagen)
                                 .into(holder.imagenIv)
-                        }catch (e:Exception){
+                        }catch (_:Exception){
 
                         }
                     }

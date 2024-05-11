@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.redsystemstudio.appcomprayventa"
-        minSdk = 24
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -43,8 +43,10 @@ android {
 
 dependencies {
 
+    //noinspection GradleDependency
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
+    //noinspection GradleDependency
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
@@ -54,14 +56,17 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    //noinspection GradleDependency
     implementation ("com.google.android.gms:play-services-maps:18.1.0")
-    implementation ("com.google.android.libraries.places:places:3.1.0")
+    implementation ("com.google.android.libraries.places:places:3.4.0")
     implementation ("com.hbb20:ccp:2.7.0")
     implementation ("com.github.chrisbanes:PhotoView:2.3.0")
+    //noinspection GradleDependency
     implementation ("com.google.firebase:firebase-messaging-ktx:23.3.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.android.volley:volley:1.2.1")
 
+    //noinspection GradleDependency
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
