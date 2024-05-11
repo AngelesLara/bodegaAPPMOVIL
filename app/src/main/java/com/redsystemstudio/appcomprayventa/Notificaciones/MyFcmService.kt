@@ -1,5 +1,6 @@
 package com.redsystemstudio.appcomprayventa.Notificaciones
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -12,6 +13,7 @@ import com.redsystemstudio.appcomprayventa.Chat.ChatActivity
 import com.redsystemstudio.appcomprayventa.R
 import java.util.Random
 
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class MyFcmService : FirebaseMessagingService() {
 
     companion object{
@@ -24,7 +26,7 @@ class MyFcmService : FirebaseMessagingService() {
         val body = "${message.notification?.body}"
 
         val senderUid = "${message.data["senderUid"]}"
-        val notificationType = "${message.data["notificationType"]}"
+        "${message.data["notificationType"]}"
 
         showNotification(title, body, senderUid)
     }

@@ -37,6 +37,4 @@ class FiltrarAnuncio (
         adaptador.anuncioArrayList = resultados.values as ArrayList<ModeloAnuncio>
         adaptador.notifyDataSetChanged()
     }
-
-
 }
