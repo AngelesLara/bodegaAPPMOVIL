@@ -77,7 +77,7 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
 
         autocompleteSupportMapFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
             override fun onPlaceSelected(place: Place) {
-                val id = place.id
+                place.id
                 val name = place.name
                 val latlng = place.latLng
 
@@ -85,7 +85,11 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
                 selectedLongitude = latlng?.longitude
                 direccion = place.address?: ""
 
-                agregarMarcador(latlng, name, direccion)
+                if (latlng != null) {
+                    if (name != null) {
+                        agreeMarcador(latlng, name, direccion)
+                    }
+                }
             }
             override fun onError(p0: Status) {
                 Toast.makeText(applicationContext,"Búsqueda cancelada",Toast.LENGTH_SHORT).show()
@@ -135,10 +139,10 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
                     direccionLatLng(latLng)
                 }
 
-            }.addOnFailureListener { e->
+            }.addOnFailureListener { _ ->
 
             }
-        }catch (e:Exception){
+        }catch (_:Exception){
 
         }
     }
@@ -149,12 +153,12 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
         var networkEnable = false
         try {
             gpsEnable = lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        }catch (e:Exception){
+        }catch (_:Exception){
 
         }
         try {
             networkEnable = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-        }catch (e:Exception){
+        }catch (_:Exception){
 
         }
 
@@ -182,7 +186,6 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
 
             direccionLatLng(latlng)
         }
-
     }
 
     private fun direccionLatLng(latlng: LatLng) {
@@ -192,20 +195,20 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
             val address = addressList!![0]
             val addressLine = address.getAddressLine(0)
             val subLocality = address.subLocality
-            direccion= "$addressLine"
-            agregarMarcador(latlng,"$subLocality","$addressLine")
-        }catch (e:Exception){
+            direccion= addressLine
+            agreeMarcador(latlng, subLocality, addressLine)
+        }catch (_:Exception){
 
         }
     }
 
-    private fun agregarMarcador(latlng: LatLng, titulo : String, direccion : String){
+    private fun agreeMarcador(latlng: LatLng, titulo : String, direccion : String){
         mMap!!.clear()
         try {
             val markerOptions = MarkerOptions()
             markerOptions.position(latlng)
-            markerOptions.title("$titulo")
-            markerOptions.snippet("$direccion")
+            markerOptions.title(titulo)
+            markerOptions.snippet(direccion)
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
 
             mMap!!.addMarker(markerOptions)
@@ -213,7 +216,7 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
 
             binding.listoLl.visibility = View.VISIBLE
             binding.lugarSelecTv.text = direccion
-        }catch (e:Exception){
+        }catch (_:Exception){
 
         }
     }

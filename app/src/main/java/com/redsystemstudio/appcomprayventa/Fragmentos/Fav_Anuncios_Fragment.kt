@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.redsystemstudio.appcomprayventa.Adaptadores.AdaptadorAnuncio
 import com.redsystemstudio.appcomprayventa.Modelo.ModeloAnuncio
-import com.redsystemstudio.appcomprayventa.R
 import com.redsystemstudio.appcomprayventa.databinding.FragmentFavAnunciosBinding
 
 
@@ -35,7 +34,7 @@ class Fav_Anuncios_Fragment : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentFavAnunciosBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,7 +54,7 @@ class Fav_Anuncios_Fragment : Fragment() {
                 try {
                     val consulta = filtro.toString()
                     anunciosAdaptador.filter.filter(consulta)
-                }catch (e:Exception){
+                }catch (_:Exception){
 
                 }
             }
@@ -98,7 +97,7 @@ class Fav_Anuncios_Fragment : Fragment() {
                                     try {
                                         val modeloAnuncio = snapshot.getValue(ModeloAnuncio::class.java)
                                         anunciosArrayList.add(modeloAnuncio!!)
-                                    }catch (e:Exception){
+                                    }catch (_:Exception){
 
                                     }
                                 }

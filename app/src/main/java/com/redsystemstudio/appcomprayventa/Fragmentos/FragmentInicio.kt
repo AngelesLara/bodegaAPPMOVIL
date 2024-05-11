@@ -24,7 +24,6 @@ import com.redsystemstudio.appcomprayventa.Adaptadores.AdaptadorCategoria
 import com.redsystemstudio.appcomprayventa.Constantes
 import com.redsystemstudio.appcomprayventa.Modelo.ModeloAnuncio
 import com.redsystemstudio.appcomprayventa.Modelo.ModeloCategoria
-import com.redsystemstudio.appcomprayventa.R
 import com.redsystemstudio.appcomprayventa.RvListenerCategoria
 import com.redsystemstudio.appcomprayventa.SeleccionarUbicacion
 import com.redsystemstudio.appcomprayventa.databinding.FragmentInicioBinding
@@ -54,7 +53,7 @@ class FragmentInicio : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentInicioBinding.inflate(LayoutInflater.from(mContext),container,false)
         return binding.root
@@ -90,7 +89,7 @@ class FragmentInicio : Fragment() {
                 try {
                     val consulta = filtro.toString()
                     adaptadorAnuncio.filter.filter(consulta)
-                }catch (e:Exception){
+                }catch (_:Exception){
 
                 }
             }
@@ -178,13 +177,13 @@ class FragmentInicio : Fragment() {
                                 anuncioArrayList.add(modeloAnuncio!!)
                             }
                         }else{
-                            if (modeloAnuncio!!.categoria.equals(categoria)){
+                            if (modeloAnuncio!!.categoria == categoria){
                                 if (distancia <= MAX_DISTANCIA_MOSTRAR_ANUNCIO){
                                     anuncioArrayList.add(modeloAnuncio)
                                 }
                             }
                         }
-                    }catch (e:Exception){
+                    }catch (_:Exception){
 
                     }
                 }

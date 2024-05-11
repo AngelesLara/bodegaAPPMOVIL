@@ -33,7 +33,7 @@ class FragmentChats : Fragment() {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         binding = FragmentChatsBinding.inflate(inflater,container, false)
         return binding.root
@@ -55,7 +55,7 @@ class FragmentChats : Fragment() {
                 try {
                     val consulta = filtro.toString()
                     adaptadorChats.filter.filter(consulta)
-                }catch (e:Exception){
+                }catch (_:Exception){
 
                 }
             }

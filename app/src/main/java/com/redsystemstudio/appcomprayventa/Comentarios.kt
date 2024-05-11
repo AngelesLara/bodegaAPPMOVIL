@@ -101,8 +101,6 @@ class Comentarios : AppCompatActivity() {
                 agregarComentario()
             }
         }
-
-
     }
 
     private fun agregarComentario() {
@@ -112,11 +110,11 @@ class Comentarios : AppCompatActivity() {
         val tiempo = "${Constantes.obtenerTiempoDis()}"
 
         val hashMap = HashMap<String, Any> ()
-        hashMap["id"] = "$tiempo"
-        hashMap["tiempo"] = "$tiempo"
+        hashMap["id"] = tiempo
+        hashMap["tiempo"] = tiempo
         hashMap["uid"] = "${firebaseAuth.uid}" //Usuario el cual está visualizando los comentarios del vendedor
         hashMap["uid_vendedor"] = uidVendedor
-        hashMap["comentario"] = "${comentario}"
+        hashMap["comentario"] = comentario
 
         val ref = FirebaseDatabase.getInstance().getReference("ComentariosVendedores")
         ref.child(uidVendedor).child("Comentarios").child(tiempo)
@@ -133,13 +131,5 @@ class Comentarios : AppCompatActivity() {
                     "${e.message}",
                     Toast.LENGTH_SHORT).show()
             }
-
-
-
-
-
-
-
-
     }
 }

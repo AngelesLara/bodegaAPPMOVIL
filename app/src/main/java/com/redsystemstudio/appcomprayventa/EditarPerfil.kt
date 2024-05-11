@@ -105,10 +105,10 @@ class EditarPerfil : AppCompatActivity() {
 
         val hashMap : HashMap<String, Any> = HashMap()
 
-        hashMap["nombres"] = "${nombres}"
-        hashMap["fecha_nac"] = "${f_nac}"
-        hashMap["codigoTelefono"] = "${codigo}"
-        hashMap["telefono"] = "${telefono}"
+        hashMap["nombres"] = nombres
+        hashMap["fecha_nac"] = f_nac
+        hashMap["codigoTelefono"] = codigo
+        hashMap["telefono"] = telefono
 
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child(firebaseAuth.uid!!)

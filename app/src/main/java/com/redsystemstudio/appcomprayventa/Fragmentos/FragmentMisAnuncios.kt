@@ -12,7 +12,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.redsystemstudio.appcomprayventa.R
 import com.redsystemstudio.appcomprayventa.databinding.FragmentMisAnunciosBinding
 
 

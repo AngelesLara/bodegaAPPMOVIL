@@ -1,5 +1,6 @@
 package com.redsystemstudio.appcomprayventa.Fragmentos
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -38,7 +39,7 @@ class FragmentCuenta : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCuentaBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -70,10 +71,10 @@ class FragmentCuenta : Fragment() {
             val alertDialog = MaterialAlertDialogBuilder(mContext)
             alertDialog.setTitle("Eliminar todos mis anuncios")
                 .setMessage("¿Estás seguro(a) de eliminar todos tus anuncios?")
-                .setPositiveButton("Eliminar"){dialog, which->
+                .setPositiveButton("Eliminar"){ _, _ ->
                     eliminarTodosMiAnuncios()
                 }
-                .setNegativeButton("Cancelar"){dialog, which->
+                .setNegativeButton("Cancelar"){ dialog, _ ->
                     dialog.dismiss()
                 }
                 .show()
@@ -110,7 +111,7 @@ class FragmentCuenta : Fragment() {
 
         val hashMap = HashMap<String, Any>()
         hashMap["estado"] = "Offline"
-        ref!!.updateChildren(hashMap)
+        ref.updateChildren(hashMap)
     }
 
     private fun eliminarTodosMiAnuncios() {
@@ -135,6 +136,7 @@ class FragmentCuenta : Fragment() {
         val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
         ref.child("${firebaseAuth.uid}")
             .addValueEventListener(object : ValueEventListener{
+                @SuppressLint("SetTextI18n")
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val nombres = "${snapshot.child("nombres").value}"
                     val email = "${snapshot.child("email").value}"

@@ -1,5 +1,6 @@
 package com.redsystemstudio.appcomprayventa.Anuncios
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ContentValues
@@ -42,6 +43,7 @@ class CrearAnuncio : AppCompatActivity() {
     private var Edicion = false
     private var idAnuncioEditar = ""
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCrearAnuncioBinding.inflate(layoutInflater)
@@ -92,7 +94,7 @@ class CrearAnuncio : AppCompatActivity() {
     }
 
     private fun cargarDetalles() {
-        var ref = FirebaseDatabase.getInstance().getReference("Anuncios")
+        val ref = FirebaseDatabase.getInstance().getReference("Anuncios")
         ref.child(idAnuncioEditar)
             .addListenerForSingleValueEvent(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -213,13 +215,13 @@ class CrearAnuncio : AppCompatActivity() {
 
         val hashMap = HashMap<String, Any>()
 
-        hashMap["marca"] = "${marca}"
-        hashMap["categoria"] = "${categoria}"
-        hashMap["condicion"] = "${condicion}"
-        hashMap["direccion"] = "${direccion}"
-        hashMap["precio"] = "${precio}"
-        hashMap["titulo"] = "${titulo}"
-        hashMap["descripcion"] = "${descripcion}"
+        hashMap["marca"] = marca
+        hashMap["categoria"] = categoria
+        hashMap["condicion"] = condicion
+        hashMap["direccion"] = direccion
+        hashMap["precio"] = precio
+        hashMap["titulo"] = titulo
+        hashMap["descripcion"] = descripcion
         hashMap["latitud"] = latitud
         hashMap["longitud"] = longitud
 
@@ -262,16 +264,16 @@ class CrearAnuncio : AppCompatActivity() {
         val keyId = ref.push().key
 
         val hashMap = HashMap<String, Any>()
-        hashMap["id"] = "${keyId}"
+        hashMap["id"] = "$keyId"
         hashMap["uid"] = "${firebaseAuth.uid}"
-        hashMap["marca"] = "${marca}"
-        hashMap["categoria"] = "${categoria}"
-        hashMap["condicion"] = "${condicion}"
-        hashMap["direccion"] = "${direccion}"
-        hashMap["precio"] = "${precio}"
-        hashMap["titulo"] = "${titulo}"
-        hashMap["descripcion"] = "${descripcion}"
-        hashMap["estado"] = "${Constantes.anuncio_disponible}"
+        hashMap["marca"] = marca
+        hashMap["categoria"] = categoria
+        hashMap["condicion"] = condicion
+        hashMap["direccion"] = direccion
+        hashMap["precio"] = precio
+        hashMap["titulo"] = titulo
+        hashMap["descripcion"] = descripcion
+        hashMap["estado"] = Constantes.anuncio_disponible
         hashMap["tiempo"] = tiempo
         hashMap["latitud"] = latitud
         hashMap["longitud"] = longitud
@@ -306,7 +308,7 @@ class CrearAnuncio : AppCompatActivity() {
 
                         if (uriTask.isSuccessful){
                             val hashMap = HashMap<String, Any>()
-                            hashMap["id"] = "${modeloImagenSel.id}"
+                            hashMap["id"] = modeloImagenSel.id
                             hashMap["imagenUrl"] = "$urlImgCargada"
 
                             val ref = FirebaseDatabase.getInstance().getReference("Anuncios")
@@ -341,6 +343,7 @@ class CrearAnuncio : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun limpiarCampos(){
         imagenSelecArrayList.clear()
         adaptadorImagenSel.notifyDataSetChanged()

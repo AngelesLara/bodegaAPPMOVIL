@@ -9,24 +9,24 @@ class FiltrarAnuncio (
     private val adaptador : AdaptadorAnuncio,
     private val filtroLista : ArrayList<ModeloAnuncio>
 ) : Filter(){
-    override fun performFiltering(filtro : CharSequence?): FilterResults {
-        var filtro = filtro
+    override fun performFiltering(filtro: CharSequence?): FilterResults {
+        val textoFiltro: CharSequence?
         val resultados = FilterResults()
 
-        if (!filtro.isNullOrEmpty()){
-            filtro = filtro.toString().uppercase(Locale.getDefault())
+        if (!filtro.isNullOrEmpty()) {
+            textoFiltro = filtro.toString().uppercase(Locale.getDefault())
             val filtroModelo = ArrayList<ModeloAnuncio>()
-            for (i in filtroLista.indices){
-                if (filtroLista[i].marca.uppercase(Locale.getDefault()).contains(filtro) ||
-                    filtroLista[i].categoria.uppercase(Locale.getDefault()).contains(filtro)||
-                    filtroLista[i].condicion.uppercase(Locale.getDefault()).contains(filtro) ||
-                    filtroLista[i].titulo.uppercase(Locale.getDefault()).contains(filtro)){
+            for (i in filtroLista.indices) {
+                if (filtroLista[i].marca.uppercase(Locale.getDefault()).contains(textoFiltro) ||
+                    filtroLista[i].categoria.uppercase(Locale.getDefault()).contains(textoFiltro) ||
+                    filtroLista[i].condicion.uppercase(Locale.getDefault()).contains(textoFiltro) ||
+                    filtroLista[i].titulo.uppercase(Locale.getDefault()).contains(textoFiltro)) {
                     filtroModelo.add(filtroLista[i])
                 }
             }
             resultados.count = filtroModelo.size
             resultados.values = filtroModelo
-        }else{
+        } else {
             resultados.count = filtroLista.size
             resultados.values = filtroLista
         }
